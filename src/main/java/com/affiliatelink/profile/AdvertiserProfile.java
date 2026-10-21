@@ -1,10 +1,21 @@
-package com.affiliatelink.profile.model;
+package com.affiliatelink.profile;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
 
-class AdvertiserProfile extends Profile{
+
+@Entity
+@Table(name = "profile_advrtisers")
+class AdvertiserProfile extends Profile {
+
+    @Column(name = "company_name" ,nullable = false)
     private String companyName;
+    @Column(name = "sector" ,nullable = false)
     private String sector;
+    @Column(name = "website" ,nullable = false)
     private String website;
 
     public AdvertiserProfile(Long id, String email, Status status, LocalDateTime ceatedAt, String companyName, String sector, String website) {

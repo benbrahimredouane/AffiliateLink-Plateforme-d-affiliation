@@ -1,12 +1,27 @@
-package com.affiliatelink.profile.model;
+package com.affiliatelink.profile;
+
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-class PublisherProfile  extends Profile{
+@Entity
+@Table(name = "profile_publishers")
+class PublisherProfile  extends Profile {
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "niche")
+    @Enumerated(EnumType.STRING)
     private Niche niche;
+
+    @Column(name = "bio")
     private String bio;
+
+    @Column(name = "country")
     private String country;
 
 

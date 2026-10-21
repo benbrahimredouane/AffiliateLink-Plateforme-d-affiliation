@@ -1,4 +1,4 @@
-package com.affiliatelink.profile.model;
+package com.affiliatelink.profile;
 
 enum Status {
     PENDING,
