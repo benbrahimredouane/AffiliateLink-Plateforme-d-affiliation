@@ -8,7 +8,7 @@ import lombok.Setter;
 import java.time.OffsetDateTime;
 
 @Entity
-@Table(name = "profile_profi0les")
+@Table(name = "profile_profiles")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter

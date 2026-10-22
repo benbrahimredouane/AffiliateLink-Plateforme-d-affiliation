@@ -3,6 +3,7 @@ package com.affiliatelink.profile;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Service
 class PublisherProfileService {
@@ -46,6 +47,10 @@ class PublisherProfileService {
                   , savedpublisher.getCountry());
 
 
+      }
+      List<PublisherProfile> findpublishers(){
+          List<PublisherProfile> resList = publisherProfileRepository.findAll();
+          return resList;
       }
 
 }
