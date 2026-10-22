@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 class PublisherProfileService {
@@ -51,6 +52,11 @@ class PublisherProfileService {
       List<PublisherProfile> findpublishers(){
           List<PublisherProfile> resList = publisherProfileRepository.findAll();
           return resList;
+      }
+
+      Optional<PublisherProfile> findpublisherbyid(Long id){
+         Optional< PublisherProfile> publisherProfile = publisherProfileRepository.findById(id);
+          return publisherProfile;
       }
 
 }

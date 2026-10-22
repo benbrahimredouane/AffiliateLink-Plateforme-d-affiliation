@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -26,9 +27,18 @@ class PublisherProfileController {
     }
 
     @GetMapping("/publishers")
-    ResponseEntity<List<PublisherProfile>> findAllpublishers(){
+    ResponseEntity<List<PublisherProfile>> findPublishers(){
         List<PublisherProfile> res = publisherProfileService.findpublishers();
         return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
+
+    @GetMapping("/publishers/{id}")
+    ResponseEntity<?> findPublisher(@PathVariable("id") Long id){
+        Optional<PublisherProfile> publisherProfile = publisherProfileService.findpublisherbyid(id);
+        if(publisherProfile.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(publisherProfile.get());
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
     }
 
 }
