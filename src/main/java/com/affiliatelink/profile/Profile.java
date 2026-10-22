@@ -11,6 +11,7 @@ import java.time.OffsetDateTime;
 @Table(name = "profile_profiles")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
+@Setter
 @NoArgsConstructor
 abstract class Profile {
     @Id
