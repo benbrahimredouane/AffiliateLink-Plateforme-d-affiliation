@@ -1,5 +1,6 @@
 package com.affiliatelink.profile;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ class AdvertiserProfileController {
     }
 
     @PostMapping("/advertisers")
-    CreateAdvertiserRes createAdvertiser(@RequestBody CreateAdvertiserReq req){
+    CreateAdvertiserRes createAdvertiser(@Valid @RequestBody CreateAdvertiserReq req){
          CreateAdvertiserRes createAdvertiserRes = advertiserProfileService.createAdvertiser(req);
          return createAdvertiserRes;
     }
