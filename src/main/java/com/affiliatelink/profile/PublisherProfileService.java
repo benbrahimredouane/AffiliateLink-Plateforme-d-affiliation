@@ -24,7 +24,7 @@ class PublisherProfileService {
 
       CreatePublisherRes createPublisher(CreatePublisherReq req){
           if(profileRepository.existsByemail(req.email())){
-              throw new EmailExistException("Email allready exist !");
+              throw new EmailExistException("Email already exist !");
           }
 
           PublisherProfile publisherProfile = new PublisherProfile();
@@ -59,7 +59,7 @@ class PublisherProfileService {
       PublisherProfile findpublisherbyid(Long id){
       PublisherProfile publisherProfile = publisherProfileRepository.findById(id).orElseThrow( ()->
               new ProfileNotFoundException(
-                      "profile with id : "+id +" not found"
+                      "profile with id : "+ id +" not found"
       ));
           return publisherProfile;
       }

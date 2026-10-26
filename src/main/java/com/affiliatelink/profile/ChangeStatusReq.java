@@ -1,6 +1,6 @@
 package com.affiliatelink.profile;
 
-import jakarta.validation.constraints.NotBlank;
+
 import jakarta.validation.constraints.NotNull;
 
 record ChangeStatusReq(

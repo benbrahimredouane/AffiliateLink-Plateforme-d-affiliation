@@ -20,7 +20,7 @@ class AdvertiserProfileService {
     }
     CreateAdvertiserRes createAdvertiser(CreateAdvertiserReq req){
         if(profileRepository.existsByemail(req.email())){
-            throw new EmailExistException("email allready in use");
+            throw new EmailExistException("email already in use");
         }
         AdvertiserProfile advertiserProfile = new AdvertiserProfile();
 

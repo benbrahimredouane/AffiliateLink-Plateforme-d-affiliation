@@ -7,12 +7,12 @@ import jakarta.validation.constraints.Size;
 
 public record CreateAdvertiserReq(
         @NotBlank(message = "email must not be blank")
-        @Email
+        @Email(message = "try an valid email")
         @Size(max = 255)
         String email,
 
 
-        @NotBlank(message = "companyname must not be blank")
+        @NotBlank(message = "company must not be blank")
         @Size(max = 200)
         String companyName,
 
