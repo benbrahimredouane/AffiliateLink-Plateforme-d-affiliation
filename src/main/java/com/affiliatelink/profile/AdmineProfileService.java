@@ -1,26 +1,33 @@
 package com.affiliatelink.profile;
 
+
+import com.affiliatelink.common.exception.ProfileNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
- class AdmineProfileService {
+class AdmineProfileService {
     private final ProfileRepository profileRepository;
     AdmineProfileService( ProfileRepository profileRepository){
         this.profileRepository = profileRepository;
 
     }
-    ChangeStatusRes changestatus(Long id , ChangeStatusReq req){
-       Optional<Profile> Optionalprofile = profileRepository.findById(id);
+    ChangeStatusRes changeStatus(Long id , ChangeStatusReq req){
 
+          Profile profile = profileRepository.findById(id)
+                  .orElseThrow( ()->
+                          new ProfileNotFoundException("Profile not found with id "+ id)
+                  );
 
-           Profile profile  = Optionalprofile.get();
-           profile.setStatus(req.status());
+           profile.changeStatus(req.status());
 
            Profile savedProfile = profileRepository.save(profile);
 
-          return new ChangeStatusRes(savedProfile.getId() ,savedProfile.getEmail() , savedProfile.getStatus());
+          return new ChangeStatusRes(
+                  savedProfile.getId()
+                  ,savedProfile.getEmail()
+                  , savedProfile.getStatus()
+          );
 
 
 

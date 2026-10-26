@@ -1,6 +1,8 @@
 package com.affiliatelink.profile;
 
 
+import com.affiliatelink.common.exception.EmailExistException;
+import com.affiliatelink.common.exception.ProfileNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,7 @@ class AdvertiserProfileService {
     }
     CreateAdvertiserRes createAdvertiser(CreateAdvertiserReq req){
         if(profileRepository.existsByemail(req.email())){
-            throw new IllegalArgumentException("email allready in use");
+            throw new EmailExistException("email allready in use");
         }
         AdvertiserProfile advertiserProfile = new AdvertiserProfile();
 
@@ -44,8 +46,9 @@ class AdvertiserProfileService {
         return advertiserProfiles;
     }
 
-    Optional<AdvertiserProfile> findAdvertiserById(Long id){
-        Optional<AdvertiserProfile> optionalAdvertiserProfile = advertiserProfileRepository.findById(id);
+    AdvertiserProfile findAdvertiserById(Long id){
+        AdvertiserProfile optionalAdvertiserProfile = advertiserProfileRepository.findById(id).orElseThrow(()->
+                new ProfileNotFoundException("profile with id: "+id+" not exists"));
         return optionalAdvertiserProfile;
     }
 

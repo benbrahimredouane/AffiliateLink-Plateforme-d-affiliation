@@ -34,11 +34,11 @@ class PublisherProfileController {
 
     @GetMapping("/publishers/{id}")
     ResponseEntity<?> findPublisher(@PathVariable("id") Long id){
-        Optional<PublisherProfile> publisherProfile = publisherProfileService.findpublisherbyid(id);
-        if(publisherProfile.isPresent()) {
-            return ResponseEntity.status(HttpStatus.OK).body(publisherProfile.get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
+        PublisherProfile publisherProfile = publisherProfileService.findpublisherbyid(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(publisherProfile);
+
+
     }
 
 }
