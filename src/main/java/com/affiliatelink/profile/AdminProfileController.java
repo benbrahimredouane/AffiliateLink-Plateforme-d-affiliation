@@ -22,7 +22,7 @@ class AdminProfileController {
    @PatchMapping("/profiles/{id}/status")
     ResponseEntity<?> changeStatus(@PathVariable("id") Long id ,@Valid @RequestBody ChangeStatusReq req){
 
-        ChangeStatusRes changeStatusRes = admineProfileService.changestatus(id,req);
+        ChangeStatusRes changeStatusRes = admineProfileService.changeStatus(id,req);
 
         return ResponseEntity.noContent().build();
 

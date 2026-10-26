@@ -1,5 +1,6 @@
 package com.affiliatelink.profile;
 
+import com.affiliatelink.common.exception.StatusInvalidException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,6 +35,19 @@ abstract class Profile {
             createdAt = OffsetDateTime.now();
         }
     }
+
+    protected void changeStatus(Status newStatus){
+        boolean allowed = (this.status == Status.PENDING && newStatus == Status.ACTIVE)
+                          || (this.status == Status.ACTIVE && newStatus ==Status.SUSPENDED)
+                          || (this.status == Status.SUSPENDED && newStatus == Status.ACTIVE);
+
+        if(!allowed) {
+            throw  new StatusInvalidException("cannot change from: "+ this.status + "to : "+newStatus);
+        }
+
+        this.status = newStatus;
+    }
+
 
 
 

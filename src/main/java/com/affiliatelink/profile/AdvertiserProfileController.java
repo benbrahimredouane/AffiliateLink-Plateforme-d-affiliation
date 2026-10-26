@@ -33,11 +33,10 @@ class AdvertiserProfileController {
     }
 
     @GetMapping("/advertisers/{id}")
-    ResponseEntity<?> findAdById(@PathVariable("id") Long id){
-        Optional<AdvertiserProfile> advertiserProfile = advertiserProfileService.findAdvertiserById(id);
-        if(advertiserProfile.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(advertiserProfile.get());
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("not found");
+    AdvertiserProfile findAdById(@PathVariable("id") Long id){
+       AdvertiserProfile advertiserProfile = advertiserProfileService.findAdvertiserById(id);
+
+            return advertiserProfile;
+
     }
 }
