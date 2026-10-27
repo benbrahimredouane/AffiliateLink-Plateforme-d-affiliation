@@ -1,15 +1,19 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.service;
 
 
-import com.affiliatelink.common.exception.EmailExistException;
-import com.affiliatelink.common.exception.ProfileNotFoundException;
+import com.affiliatelink.common.EmailExistException;
+import com.affiliatelink.common.ProfileNotFoundException;
+import com.affiliatelink.profile.repository.AdvertiserProfileRepository;
+import com.affiliatelink.profile.dto.CreateAdvertiserReq;
+import com.affiliatelink.profile.dto.CreateAdvertiserRes;
+import com.affiliatelink.profile.repository.ProfileRepository;
+import com.affiliatelink.profile.model.AdvertiserProfile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-class AdvertiserProfileService {
+public class AdvertiserProfileService {
 
       AdvertiserProfileRepository advertiserProfileRepository;
       ProfileRepository profileRepository;
@@ -18,7 +22,7 @@ class AdvertiserProfileService {
         this.profileRepository = profileRepository;
 
     }
-    CreateAdvertiserRes createAdvertiser(CreateAdvertiserReq req){
+    public CreateAdvertiserRes createAdvertiser(CreateAdvertiserReq req){
         if(profileRepository.existsByemail(req.email())){
             throw new EmailExistException("email already in use");
         }
@@ -41,12 +45,12 @@ class AdvertiserProfileService {
                 , savedAdvertiser.getWebsite());
     }
 
-    List<AdvertiserProfile> findalladvertisers(){
+    public List<AdvertiserProfile> findalladvertisers(){
         List<AdvertiserProfile> advertiserProfiles = advertiserProfileRepository.findAll();
         return advertiserProfiles;
     }
 
-    AdvertiserProfile findAdvertiserById(Long id){
+    public AdvertiserProfile findAdvertiserById(Long id){
         AdvertiserProfile optionalAdvertiserProfile = advertiserProfileRepository.findById(id).orElseThrow(()->
                 new ProfileNotFoundException("profile with id: "+id+" not exists"));
         return optionalAdvertiserProfile;

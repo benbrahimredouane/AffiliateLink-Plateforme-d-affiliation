@@ -1,4 +1,4 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-class PublisherProfile  extends Profile {
+public class PublisherProfile  extends Profile {
 
     @Column(nullable = false)
     private String firstName;

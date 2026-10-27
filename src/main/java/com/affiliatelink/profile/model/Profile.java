@@ -1,6 +1,7 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.model;
 
-import com.affiliatelink.common.exception.StatusInvalidException;
+import com.affiliatelink.common.StatusInvalidException;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-abstract class Profile {
+public abstract class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +37,7 @@ abstract class Profile {
         }
     }
 
-    protected void changeStatus(Status newStatus){
+    public void changeStatus(Status newStatus){
         boolean allowed = (this.status == Status.PENDING && newStatus == Status.ACTIVE)
                           || (this.status == Status.ACTIVE && newStatus ==Status.SUSPENDED)
                           || (this.status == Status.SUSPENDED && newStatus == Status.ACTIVE);

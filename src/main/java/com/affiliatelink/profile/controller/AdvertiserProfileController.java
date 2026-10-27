@@ -1,12 +1,15 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.controller;
 
+import com.affiliatelink.profile.model.AdvertiserProfile;
+import com.affiliatelink.profile.service.AdvertiserProfileService;
+import com.affiliatelink.profile.dto.CreateAdvertiserReq;
+import com.affiliatelink.profile.dto.CreateAdvertiserRes;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -27,7 +30,7 @@ class AdvertiserProfileController {
     }
 
     @GetMapping("/advertisers")
-    ResponseEntity<List<AdvertiserProfile>> findalladvertisers(){
+    public ResponseEntity<List<AdvertiserProfile>> findalladvertisers(){
         List<AdvertiserProfile> adList = advertiserProfileService.findalladvertisers();
         return ResponseEntity.status(HttpStatus.OK).body(adList);
     }

@@ -1,15 +1,18 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.service;
 
-import com.affiliatelink.common.exception.EmailExistException;
-import com.affiliatelink.common.exception.ProfileNotFoundException;
+import com.affiliatelink.common.EmailExistException;
+import com.affiliatelink.common.ProfileNotFoundException;
+import com.affiliatelink.profile.dto.CreatePublisherReq;
+import com.affiliatelink.profile.dto.CreatePublisherRes;
+import com.affiliatelink.profile.repository.ProfileRepository;
+import com.affiliatelink.profile.repository.PublisherProfileRepository;
+import com.affiliatelink.profile.model.PublisherProfile;
 import org.springframework.stereotype.Service;
 
-import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
-class PublisherProfileService {
+public class PublisherProfileService {
       private final PublisherProfileRepository publisherProfileRepository;
       private final ProfileRepository profileRepository;
 
@@ -22,7 +25,7 @@ class PublisherProfileService {
           this.profileRepository = profileRepository;
       }
 
-      CreatePublisherRes createPublisher(CreatePublisherReq req){
+      public CreatePublisherRes createPublisher(CreatePublisherReq req){
           if(profileRepository.existsByemail(req.email())){
               throw new EmailExistException("Email already exist !");
           }
@@ -51,12 +54,12 @@ class PublisherProfileService {
 
 
       }
-      List<PublisherProfile> findpublishers(){
+      public List<PublisherProfile> findpublishers(){
           List<PublisherProfile> resList = publisherProfileRepository.findAll();
           return resList;
       }
 
-      PublisherProfile findpublisherbyid(Long id){
+     public  PublisherProfile findpublisherbyid(Long id){
       PublisherProfile publisherProfile = publisherProfileRepository.findById(id).orElseThrow( ()->
               new ProfileNotFoundException(
                       "profile with id : "+ id +" not found"

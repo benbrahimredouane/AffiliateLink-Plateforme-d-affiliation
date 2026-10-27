@@ -1,4 +1,4 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.dto;
 
 
 import jakarta.validation.constraints.Email;

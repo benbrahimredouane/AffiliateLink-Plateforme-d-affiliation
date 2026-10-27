@@ -1,4 +1,4 @@
-package com.affiliatelink.common.exception;
+package com.affiliatelink.common;
 
 public class EmailExistException extends RuntimeException {
     public EmailExistException(String message) {

@@ -1,4 +1,4 @@
-package com.affiliatelink.common.exception;
+package com.affiliatelink.common;
 
 public class StatusInvalidException extends RuntimeException {
     public StatusInvalidException(String message) {

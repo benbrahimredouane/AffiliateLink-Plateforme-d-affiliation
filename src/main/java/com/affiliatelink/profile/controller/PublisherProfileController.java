@@ -1,12 +1,15 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.controller;
 
+import com.affiliatelink.profile.dto.CreatePublisherReq;
+import com.affiliatelink.profile.dto.CreatePublisherRes;
+import com.affiliatelink.profile.model.PublisherProfile;
+import com.affiliatelink.profile.service.PublisherProfileService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
