@@ -1,4 +1,6 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.dto;
+
+import com.affiliatelink.profile.model.Status;
 
 import java.time.OffsetDateTime;
 

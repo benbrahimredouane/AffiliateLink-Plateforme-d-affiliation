@@ -1,13 +1,15 @@
-package com.affiliatelink.profile;
+package com.affiliatelink.profile.controller;
 
+import com.affiliatelink.profile.service.AdmineProfileService;
+import com.affiliatelink.profile.dto.ChangeStatusReq;
+import com.affiliatelink.profile.dto.ChangeStatusRes;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin")
-class AdminProfileController {
+public class AdminProfileController {
 
     private final AdmineProfileService admineProfileService;
     AdminProfileController(AdmineProfileService admineProfileService){
