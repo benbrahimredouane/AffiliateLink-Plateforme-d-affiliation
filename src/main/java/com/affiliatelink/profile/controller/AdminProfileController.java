@@ -1,6 +1,6 @@
 package com.affiliatelink.profile.controller;
 
-import com.affiliatelink.profile.service.AdmineProfileService;
+import com.affiliatelink.profile.service.AdminProfileService;
 import com.affiliatelink.profile.dto.ChangeStatusReq;
 import com.affiliatelink.profile.dto.ChangeStatusRes;
 import jakarta.validation.Valid;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/admin")
 public class AdminProfileController {
 
-    private final AdmineProfileService admineProfileService;
-    AdminProfileController(AdmineProfileService admineProfileService){
+    private final AdminProfileService adminProfileService;
+    AdminProfileController(AdminProfileService adminProfileService){
 
-        this.admineProfileService = admineProfileService;
+        this.adminProfileService = adminProfileService;
     }
 
     @GetMapping("/hiii")
@@ -24,7 +24,7 @@ public class AdminProfileController {
    @PatchMapping("/profiles/{id}/status")
     ResponseEntity<?> changeStatus(@PathVariable("id") Long id ,@Valid @RequestBody ChangeStatusReq req){
 
-        ChangeStatusRes changeStatusRes = admineProfileService.changeStatus(id,req);
+        ChangeStatusRes changeStatusRes = adminProfileService.changeStatus(id,req);
 
         return ResponseEntity.noContent().build();
 
