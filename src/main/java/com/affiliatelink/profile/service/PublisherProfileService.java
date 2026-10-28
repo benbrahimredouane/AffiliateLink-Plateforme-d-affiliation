@@ -1,7 +1,7 @@
 package com.affiliatelink.profile.service;
 
-import com.affiliatelink.common.EmailExistException;
-import com.affiliatelink.common.ProfileNotFoundException;
+import com.affiliatelink.common.exception.EmailExistException;
+import com.affiliatelink.common.exception.ProfileNotFoundException;
 import com.affiliatelink.profile.dto.CreatePublisherReq;
 import com.affiliatelink.profile.dto.CreatePublisherRes;
 import com.affiliatelink.profile.repository.ProfileRepository;

@@ -1,8 +1,9 @@
 package com.affiliatelink.profile.service;
 
 
-import com.affiliatelink.common.EmailExistException;
-import com.affiliatelink.common.ProfileNotFoundException;
+import com.affiliatelink.common.exception.EmailExistException;
+import com.affiliatelink.common.exception.ProfileNotFoundException;
+import com.affiliatelink.profile.model.Status;
 import com.affiliatelink.profile.repository.AdvertiserProfileRepository;
 import com.affiliatelink.profile.dto.CreateAdvertiserReq;
 import com.affiliatelink.profile.dto.CreateAdvertiserRes;
@@ -11,6 +12,7 @@ import com.affiliatelink.profile.model.AdvertiserProfile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdvertiserProfileService {
@@ -54,6 +56,16 @@ public class AdvertiserProfileService {
         AdvertiserProfile optionalAdvertiserProfile = advertiserProfileRepository.findById(id).orElseThrow(()->
                 new ProfileNotFoundException("profile with id: "+id+" not exists"));
         return optionalAdvertiserProfile;
+    }
+    public boolean isExisitsAndActive(Long id){
+        Optional<AdvertiserProfile> optionalAdvertiserProfile = advertiserProfileRepository.findById(id);
+        if(optionalAdvertiserProfile.isEmpty()){
+            return false;
+        }
+        AdvertiserProfile profile = optionalAdvertiserProfile.get();
+        return profile.getStatus() != Status.SUSPENDED && profile.getStatus() != Status.PENDING;
+
+
     }
 
 

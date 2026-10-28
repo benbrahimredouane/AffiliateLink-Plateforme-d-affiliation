@@ -1,6 +1,6 @@
 package com.affiliatelink.profile.model;
 
-import com.affiliatelink.common.StatusInvalidException;
+import com.affiliatelink.common.exception.StatusInvalidException;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,7 +13,6 @@ import java.time.OffsetDateTime;
 @Table(name = "profile_profiles")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
-@Setter
 @NoArgsConstructor
 public abstract class Profile {
     @Id
@@ -43,7 +42,7 @@ public abstract class Profile {
                           || (this.status == Status.SUSPENDED && newStatus == Status.ACTIVE);
 
         if(!allowed) {
-            throw  new StatusInvalidException("cannot change from: "+ this.status + "to : "+newStatus);
+            throw  new StatusInvalidException("cannot change from: "+ this.status + " to : "+newStatus);
         }
 
         this.status = newStatus;
