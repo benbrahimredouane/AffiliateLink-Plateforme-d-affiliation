@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +37,7 @@ public class Offer {
     private Niche niche;
 
     @Column(name = "created_at",nullable = false ,updatable = false)
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "offer")
     private List<Campaign> campaigns = new ArrayList<>();
@@ -53,7 +53,7 @@ public class Offer {
     @PrePersist
     protected void onCreate(){
         if(createdAt == null){
-            createdAt = OffsetDateTime.now();
+            createdAt = LocalDateTime.now();
         }
     }
 
