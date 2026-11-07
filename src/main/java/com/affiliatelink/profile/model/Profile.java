@@ -3,16 +3,18 @@ package com.affiliatelink.profile.model;
 import com.affiliatelink.common.exception.StatusInvalidException;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "profile_profiles")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
+@Setter
 @NoArgsConstructor
 public abstract class Profile {
     @Id
@@ -24,15 +26,16 @@ public abstract class Profile {
 
     @Column( nullable = false )
     @Enumerated(EnumType.STRING)
+    @Setter(AccessLevel.NONE)
     private Status status = Status.PENDING;
 
     @Column( nullable = false)
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @PrePersist
     protected void onCreate(){
         if(createdAt == null){
-            createdAt = OffsetDateTime.now();
+            createdAt = LocalDateTime.now();
         }
     }
 

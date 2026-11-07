@@ -13,6 +13,20 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+    @ExceptionHandler(OfferNotFoundException.class)
+    public ResponseEntity<Map<String,String>> handleOffernoufound(
+            OfferNotFoundException exception
+    ){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message","that offer not found"));
+    }
+    @ExceptionHandler(AdvertiserNotActiveException.class)
+    public ResponseEntity<Map<String,String>> handleAdvertisernotActive(
+            AdvertiserNotActiveException exception
+    ){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("message","that  advertiser not active"));
+    }
+
     @ExceptionHandler(ProfileNotFoundException.class)
     public ResponseEntity<Map<String, String>> handleProfileNotFound(
             ProfileNotFoundException exception) {

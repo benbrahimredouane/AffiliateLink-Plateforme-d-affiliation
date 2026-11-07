@@ -1,6 +1,7 @@
 package com.affiliatelink.offer.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
@@ -9,8 +10,9 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "offer_tag")
+@Table(name = "offer_tags")
 @NoArgsConstructor
+@Getter
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

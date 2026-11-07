@@ -11,11 +11,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import lombok.Setter;
+
 @Entity
-@NoArgsConstructor
+@Table(name = "offer_offers")
 @AllArgsConstructor
 @Getter
+@NoArgsConstructor
+@Setter
 public class Offer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,6 +54,8 @@ public class Offer {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
+
+
 
     @PrePersist
     protected void onCreate(){
