@@ -1,0 +1,1 @@
+ALTER TABLE offer_campaigns DROP COLUMN IF EXISTS campaign_status;

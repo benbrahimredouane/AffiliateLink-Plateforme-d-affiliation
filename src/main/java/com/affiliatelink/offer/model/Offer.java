@@ -78,10 +78,10 @@ public class Offer {
         tags.retainAll(newTags);   // remove the tags that are no longer wanted
         tags.addAll(newTags);      // add the new ones
     }
-
-
-
-
+    public void addCampaign(Campaign campaign) {
+        campaigns.add(campaign);
+        campaign.setOffer(this);
+    }
 
 
     }
