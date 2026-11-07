@@ -1,6 +1,7 @@
 
 package com.affiliatelink.common.exception;
 
+import org.springframework.data.core.PropertyReferenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,6 +14,13 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
+    @ExceptionHandler(PropertyReferenceException.class)
+    public ResponseEntity<Map<String, String>> handleInvalidSort(PropertyReferenceException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(Map.of("message", "Invalid sort property: " + exception.getPropertyName()));
+    }
 
     @ExceptionHandler(OfferNotFoundException.class)
     public ResponseEntity<Map<String,String>> handleOffernoufound(

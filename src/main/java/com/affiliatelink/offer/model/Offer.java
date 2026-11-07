@@ -63,17 +63,29 @@ public class Offer {
             createdAt = LocalDateTime.now();
         }
     }
-
-    public void addCampaign(Campaign campaign){
-        campaigns.add(campaign);
-        campaign.setOffer(this);
-    }
-
-    public void addTag(Tag tag){
+    public void addTag(Tag tag) {
         tags.add(tag);
+    }
+
+    public void update(String title, String description, String landingUrl, Niche niche) {
+        this.title = title;
+        this.description = description;
+        this.landingUrl = landingUrl;
+        this.niche = niche;
+    }
+
+    public void replaceTags(Set<Tag> newTags) {
+        tags.retainAll(newTags);   // remove the tags that are no longer wanted
+        tags.addAll(newTags);      // add the new ones
+    }
+
+
+
+
+
 
     }
 
 
 
-}
+

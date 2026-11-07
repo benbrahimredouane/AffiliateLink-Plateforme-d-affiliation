@@ -38,4 +38,8 @@ public class Tag {
                 name
         );
     }
+
+    public void addOffre(Offer offer){
+        offers.add(offer);
+    }
 }
