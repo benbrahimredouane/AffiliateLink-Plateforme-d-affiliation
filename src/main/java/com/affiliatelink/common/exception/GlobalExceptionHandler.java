@@ -15,6 +15,11 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
 
+    @ExceptionHandler(CampaignNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleCampaignNotFound(CampaignNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message", exception.getMessage()));
+    }
+
     @ExceptionHandler(PropertyReferenceException.class)
     public ResponseEntity<Map<String, String>> handleInvalidSort(PropertyReferenceException exception) {
         return ResponseEntity

@@ -1,5 +1,6 @@
 package com.affiliatelink.offer.model;
 
+import com.affiliatelink.common.exception.StatusInvalidException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -58,5 +59,23 @@ public class Campaign {
 
     void setOffer(Offer offer) {
         this.offer = offer;
+    }
+
+    public void changeStatus(CampaignStatus newStatus) {
+        boolean allowed = (campaignStatus == CampaignStatus.DRAFT && newStatus == CampaignStatus.ACTIVE)
+                || (campaignStatus == CampaignStatus.ACTIVE
+                && (newStatus == CampaignStatus.PAUSED || newStatus == CampaignStatus.ENDED))
+                || (campaignStatus == CampaignStatus.PAUSED
+                && (newStatus == CampaignStatus.ACTIVE || newStatus == CampaignStatus.ENDED));
+
+        if (!allowed) {
+            throw new StatusInvalidException("cannot change from " + campaignStatus + " to " + newStatus);
+        }
+
+        if (newStatus == CampaignStatus.ACTIVE && endDate.isBefore(LocalDate.now())) {
+            throw new StatusInvalidException("the end date has passed, this campaign cannot be activated");
+        }
+
+        this.campaignStatus = newStatus;
     }
 }
