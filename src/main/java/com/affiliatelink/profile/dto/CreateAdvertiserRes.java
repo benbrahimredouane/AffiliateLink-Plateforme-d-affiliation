@@ -2,13 +2,13 @@ package com.affiliatelink.profile.dto;
 
 import com.affiliatelink.profile.model.Status;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 public record CreateAdvertiserRes(
         Long id,
         String email,
         Status status,
-        OffsetDateTime createdAt,
+        LocalDateTime createdAt,
         String companyName,
         String sector,
         String website

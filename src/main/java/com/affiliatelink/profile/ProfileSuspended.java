@@ -1,3 +1,5 @@
 package com.affiliatelink.profile;
 
-public record ProfileSuspended(Long profileId) {}
+public record ProfileSuspended(
+        Long profileId
+) {}
