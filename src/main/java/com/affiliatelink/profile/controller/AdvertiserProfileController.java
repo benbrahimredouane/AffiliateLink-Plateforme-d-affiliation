@@ -1,7 +1,7 @@
 package com.affiliatelink.profile.controller;
 
 import com.affiliatelink.profile.model.AdvertiserProfile;
-import com.affiliatelink.profile.service.AdvertiserProfileService;
+import com.affiliatelink.profile.service.AdvertiserProfileServiceImp;
 import com.affiliatelink.profile.dto.CreateAdvertiserReq;
 import com.affiliatelink.profile.dto.CreateAdvertiserRes;
 import jakarta.validation.Valid;
@@ -14,8 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 class AdvertiserProfileController {
-    private AdvertiserProfileService advertiserProfileService;
-    AdvertiserProfileController(AdvertiserProfileService advertiserProfileService){
+    private AdvertiserProfileServiceImp advertiserProfileService;
+    AdvertiserProfileController(AdvertiserProfileServiceImp advertiserProfileService){
         this.advertiserProfileService = advertiserProfileService;
     }
     @GetMapping("/oui")

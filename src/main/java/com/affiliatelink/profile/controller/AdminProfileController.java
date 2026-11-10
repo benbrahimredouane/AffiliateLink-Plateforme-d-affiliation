@@ -1,6 +1,6 @@
 package com.affiliatelink.profile.controller;
 
-import com.affiliatelink.profile.service.AdminProfileService;
+import com.affiliatelink.profile.service.AdminProfileServiceImp;
 import com.affiliatelink.profile.dto.ChangeStatusReq;
 import com.affiliatelink.profile.dto.ChangeStatusRes;
 import jakarta.validation.Valid;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/admin")
 public class AdminProfileController {
 
-    private final AdminProfileService adminProfileService;
-    AdminProfileController(AdminProfileService adminProfileService){
+    private final AdminProfileServiceImp adminProfileService;
+    AdminProfileController(AdminProfileServiceImp adminProfileService){
 
         this.adminProfileService = adminProfileService;
     }

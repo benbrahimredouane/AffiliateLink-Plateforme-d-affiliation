@@ -1,13 +1,13 @@
 package com.affiliatelink.profile;
 
-import com.affiliatelink.profile.service.AdvertiserProfileService;
+import com.affiliatelink.profile.service.AdvertiserProfileServiceImp;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class ProfileApiImp implements ProfileApi {
-    private final AdvertiserProfileService advertiserProfileService;
-    public ProfileApiImp(AdvertiserProfileService advertiserProfileService){
+    private final AdvertiserProfileServiceImp advertiserProfileService;
+    public ProfileApiImp(AdvertiserProfileServiceImp advertiserProfileService){
         this.advertiserProfileService = advertiserProfileService;
     }
 

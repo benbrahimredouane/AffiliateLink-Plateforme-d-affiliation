@@ -3,7 +3,7 @@ package com.affiliatelink.profile.controller;
 import com.affiliatelink.profile.dto.CreatePublisherReq;
 import com.affiliatelink.profile.dto.CreatePublisherRes;
 import com.affiliatelink.profile.model.PublisherProfile;
-import com.affiliatelink.profile.service.PublisherProfileService;
+import com.affiliatelink.profile.service.PublisherProfileServiceImp;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 class PublisherProfileController {
-    private final PublisherProfileService publisherProfileService;
+    private final PublisherProfileServiceImp publisherProfileService;
 
-    PublisherProfileController( PublisherProfileService publisherProfileService){
+    PublisherProfileController( PublisherProfileServiceImp publisherProfileService){
         this.publisherProfileService = publisherProfileService;
 
     }
