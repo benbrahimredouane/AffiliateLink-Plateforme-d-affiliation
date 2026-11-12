@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String,String>> handleEmailExistException(
             EmailExistException exception
     ){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","email allready exists!"));
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error","email already in use"));
     }
 
 

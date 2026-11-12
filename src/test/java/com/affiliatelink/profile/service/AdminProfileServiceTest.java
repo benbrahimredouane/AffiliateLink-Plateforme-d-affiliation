@@ -1,6 +1,8 @@
 package com.affiliatelink.profile.service;
 
 
+import com.affiliatelink.common.exception.ProfileNotFoundException;
+import com.affiliatelink.common.exception.StatusInvalidException;
 import com.affiliatelink.profile.ProfileSuspended;
 import com.affiliatelink.profile.dto.ChangeStatusReq;
 import com.affiliatelink.profile.dto.ChangeStatusRes;
@@ -17,6 +19,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -33,6 +36,41 @@ class AdminProfileServiceTest {
 
     @InjectMocks
     AdminProfileServiceImp adminProfileService;
+
+    @Test
+    void shouldCreateProfileWithPendingStatus(){
+        //arrange
+        Long id = 6L;
+        TestProfile profile = new TestProfile(id,"status@test.com");
+
+
+        //act assert
+        assertThat(profile.getStatus()).isEqualTo(Status.PENDING);
+
+
+    }
+
+    @Test
+    void shouldThrowExceptionWhenProfileDoesNotExist(){
+        //arrange
+
+        Long id = 99L;
+
+        ChangeStatusReq req = new ChangeStatusReq(Status.ACTIVE);
+
+        when(profileRepository.findById(id)).thenReturn(Optional.empty());
+
+        //act & assert
+
+        assertThatThrownBy(()-> adminProfileService.changeStatus(id,req)).isInstanceOf(ProfileNotFoundException.class).hasMessage("Profile not found with id 99");
+
+        verify(profileRepository).findById(id);
+
+        verify(profileRepository , never()).save(any(Profile.class));
+
+        verify(applicationEventPublisher,never()).publishEvent(any(ProfileSuspended.class));
+
+    }
 
     @Test
     void shouldChangeProfileStatusWithSuccess(){
@@ -118,6 +156,31 @@ class AdminProfileServiceTest {
         verify(applicationEventPublisher, never()).publishEvent(any(ProfileSuspended.class));
     }
 
+    @Test
+    void shouldRejectInvalidStatusTransition() {
+
+        // arrange
+        Long id = 4L;
+
+        TestProfile profile = new TestProfile(id, "newuser@example.com");
+
+        ChangeStatusReq req = new ChangeStatusReq(Status.SUSPENDED);
+
+        when(profileRepository.findById(id)).thenReturn(Optional.of(profile));
+
+        // act & assert
+        assertThatThrownBy(() ->
+                adminProfileService.changeStatus(id, req)
+        ).isInstanceOf(StatusInvalidException.class);
+
+        verify(profileRepository).findById(id);
+
+        verify(profileRepository, never()).save(any(Profile.class));
+
+        verify(applicationEventPublisher, never()).publishEvent(any(ProfileSuspended.class));
+    }
+
+    //profile de test
     private static class TestProfile extends Profile {
 
         TestProfile(Long id, String email) {
@@ -125,7 +188,6 @@ class AdminProfileServiceTest {
             setEmail(email);
         }
     }
-
 
     private TestProfile createActiveProfile(Long id, String email) {
 

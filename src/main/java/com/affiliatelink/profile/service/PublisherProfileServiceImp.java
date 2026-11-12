@@ -28,7 +28,7 @@ public class PublisherProfileServiceImp implements PublisherProfileService {
       @Override
       public CreatePublisherRes createPublisher(CreatePublisherReq req){
           if(profileRepository.existsByemail(req.email())){
-              throw new EmailExistException("Email already exist !");
+              throw new EmailExistException("email already in use");
           }
 
           PublisherProfile publisherProfile = new PublisherProfile();
